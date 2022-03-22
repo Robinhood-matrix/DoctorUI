@@ -48,7 +48,7 @@ class _HomeState extends State<HomePage> {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 140),
+                        padding: const EdgeInsets.only(left: 130),
                         child: Container(
                             alignment: Alignment.topRight,
                             child: IconButton(
@@ -320,33 +320,36 @@ class _HomeState extends State<HomePage> {
                           children: [
                             Text(
                               "Quick Appointment \n",
-                              style: TextStyle(fontSize: 18, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
                             ),
                             Text(
                               "You can make an appointment",
-                              style: TextStyle(fontSize: 15, color: Colors.white70),
+                              style: TextStyle(
+                                  fontSize: 15, color: Colors.white70),
                             ),
                             Text(
                               "at any time with any available doctor",
-                              style: TextStyle(fontSize: 15, color: Colors.white70),
+                              style: TextStyle(
+                                  fontSize: 15, color: Colors.white70),
                             ),
-                            
                           ],
                         ),
                       ),
                       Container(
-                        
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: IconButton(
-                            onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Specialist()));
+                          child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Specialist()));
                             },
                             icon: Icon(Icons.arrow_right_alt),
-                             iconSize:40, 
-                             color:Colors.white),)
-                        ),
-                    
+                            iconSize: 40,
+                            color: Colors.white),
+                      )),
                     ],
                   )),
             ],
