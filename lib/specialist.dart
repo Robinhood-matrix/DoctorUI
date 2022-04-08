@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:santosh/controller/doctorController.dart';
 import 'package:santosh/docInfo.dart';
 
-
 void main() {
   runApp(Specialist());
 }
@@ -28,7 +27,7 @@ class _SpecialistState extends State<Specialist> {
           child: Container(
             // margin: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
-              color: Color(0xff00bfff),
+              color: Color.fromRGBO(135, 206, 235, 100),
             ),
             child: Column(
               children: [
@@ -76,7 +75,7 @@ class _SpecialistState extends State<Specialist> {
                     children: [
                       Text("Choose your own",
                           style: TextStyle(fontSize: 23, color: Colors.white)),
-                      Text("Specialist",
+                      Text("Consulation",
                           style: TextStyle(fontSize: 23, color: Colors.white)),
                     ],
                   ),
@@ -90,30 +89,10 @@ class _SpecialistState extends State<Specialist> {
                         topRight: Radius.circular(30)),
                     color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text("Categories",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w100)),
-                        ),
-                        Text("See all"),
-                      ],
-                    ),
-                  ),
                 ),
                 //SizedBox(height: 5, ),
-                BuildCategoriesIcon(),
-                SizedBox(
-                  height: 20,
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                ),
 
-                BuildSpecialistContainer(),
+                BuildDoctorContainer(),
               ],
             ),
           ),
@@ -123,8 +102,8 @@ class _SpecialistState extends State<Specialist> {
   }
 }
 
-class BuildSpecialistContainer extends StatelessWidget {
-  const BuildSpecialistContainer({
+class BuildDoctorContainer extends StatelessWidget {
+  const BuildDoctorContainer({
     Key? key,
   }) : super(key: key);
 
@@ -132,204 +111,151 @@ class BuildSpecialistContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Consumer<DoctorContoller>(builder: (context, doctor, child) {
-        return Column(
+        return Row(
           children: [
             Container(
-              height: 600,
-              color: Colors.white,
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                padding: EdgeInsets.only(left: 16, right: 16),
-                itemCount: doctor.doctorList.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  DocInfo(info: doctor.doctorList[index])));
-                    },
-                    child: Container(
-                        margin: EdgeInsets.only(bottom: 20),
-                        //margin: EdgeInsets.only(right: 10),
-                        height: 110,
-                        width: 100,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 1, color: Colors.grey.shade300),
-                            borderRadius: BorderRadius.circular(15),
-                            color: Color(0xffffffff)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                width: 392,
+                height: 500,
+                color: Colors.white,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    itemCount: doctor.doctorList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DocInfo(
+                                        info: doctor.doctorList[index])));
+                          },
                           child: Container(
-                            child: Row(
+                            margin: EdgeInsets.only(bottom: 20),
+                            height: 190,
+                            width: MediaQuery.of(context).size.width * 0.85,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                    width: 1, color: Colors.black12)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Container(
-                                      color: Colors.grey,
-                                      child: Image.asset(
-                                        doctor.doctorList[index].image,
-                                        width: 120,
-                                        height: 120,
-                                        fit: BoxFit.cover,
-                                      )),
-                                ),
-                                Column(
+                                Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 18.0, bottom: 5),
-                                      child: Text(doctor.doctorList[index].name,
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w100,
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: 55,
-                                      ),
-                                      child: Text(
-                                          doctor.doctorList[index].designation,
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.grey[500],
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 30),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.star,
-                                            color: Colors.yellow,
+                                    Container(
+                                        margin:
+                                            EdgeInsets.only(left: 20, top: 10),
+                                        height: 80,
+                                        width: 75,
+                                        decoration: BoxDecoration(
+                                            color: Color.fromRGBO(
+                                                135, 206, 235, 100),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            border: Border.all(
+                                                width: 1,
+                                                color: Colors.black12)),
+                                        child: Image.asset(
+                                            doctor.doctorList[index].image)),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 20, top: 10),
+                                          child: Text(
+                                            doctor.doctorList[index].name,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500),
                                           ),
-                                          Text(
-                                              "${doctor.doctorList[index].rating}"),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Icon(Icons.timelapse,
-                                                color: Color(0xff00bfff)),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 10),
+                                          child: Text(
+                                            doctor
+                                                .doctorList[index].designation,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey[600]),
                                           ),
-                                          Text(doctor
-                                                  .doctorList[index].startTime +
-                                              '-' +
-                                              doctor.doctorList[index].endTime),
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   ],
                                 ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 15, right: 200),
+                                  child: Text(
+                                    "DATE & TIME",
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.grey[600]),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.35,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                                width: 1,
+                                                color: Colors.black12)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Icon(Icons.calendar_month),
+                                            Text(doctor
+                                                .doctorList[index].dateTime)
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                                width: 1,
+                                                color: Colors.black12)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Icon(
+                                                Icons.access_time_filled_sharp),
+                                            Text(doctor.doctorList[index]
+                                                    .startTime +
+                                                "-" +
+                                                doctor
+                                                    .doctorList[index].endTime)
+                                          ],
+                                        ),
+                                      ),
+                                    ]),
                               ],
                             ),
-                          ),
-                        )),
-                  );
-                },
-              ),
-            ),
+                          ));
+                    }))
           ],
         );
       }),
-    );
-  }
-}
-
-class BuildCategoriesIcon extends StatelessWidget {
-  const BuildCategoriesIcon({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      color: Colors.white,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.only(left: 18, right: 6),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(18.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: IconButton(
-              color: Color(0xff00bfff),
-              iconSize: 30,
-              onPressed: () {},
-              icon: Icon(FontAwesomeIcons.stethoscope),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Container(
-            padding: const EdgeInsets.all(18.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: IconButton(
-              color: Color(0xff00bfff),
-              iconSize: 30,
-              onPressed: () {},
-              icon: Icon(FontAwesomeIcons.heartPulse),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Container(
-            padding: const EdgeInsets.all(18.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: IconButton(
-              color: Color(0xff00bfff),
-              iconSize: 30,
-              onPressed: () {},
-              icon: Icon(FontAwesomeIcons.xRay),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Container(
-            padding: const EdgeInsets.all(18.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: IconButton(
-              color: Color(0xff00bfff),
-              iconSize: 30,
-              onPressed: () {},
-              icon: Icon(FontAwesomeIcons.wheelchair),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Container(
-            padding: const EdgeInsets.all(18.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: IconButton(
-              color: Color(0xff00bfff),
-              iconSize: 30,
-              onPressed: () {},
-              icon: Icon(FontAwesomeIcons.stethoscope),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

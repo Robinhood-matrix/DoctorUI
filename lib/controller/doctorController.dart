@@ -5,25 +5,25 @@ class DoctorContoller extends ChangeNotifier {
   List<Doctor> doctorList = [
     Doctor(
         id: 1,
-        name: "Dr.Adamson",
-        designation: "Therapist",
-        rating: 4.9,
+        name: "Dr.Brooklyn Simmons",
+        designation: "Gastreoenterologists",
+        dateTime: "20 Nov 2022",
         startTime: "8 AM",
         endTime: "2 PM",
-        image: "assets/doctorprofile.png"),
+        image: "assets/profile.png"),
     Doctor(
         id: 2,
-        name: "Dr.Martinas",
+        name: "Dr.Martinas Williams",
         designation: "Therapist",
-        rating: 4.7,
+        dateTime: "21 NOV 2022",
         startTime: "9 AM",
         endTime: "3 PM",
         image: "assets/doctorprofile.png"),
     Doctor(
         id: 3,
-        name: "Dr.Jonsons",
+        name: "Dr.Jonsons Mans",
         designation: "Therapist",
-        rating: 4.8,
+        dateTime: "22 NOV 2022",
         startTime: "10 AM",
         endTime: "4 PM",
         image: "assets/doctorprofile.png")
