@@ -2,6 +2,8 @@ import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:readmore/readmore.dart';
 import 'package:santosh/model/doctor_model.dart';
 import 'package:time_range/time_range.dart';
 
@@ -98,7 +100,7 @@ class _DocInfoState extends State<DocInfo> {
                             Padding(
                               padding: EdgeInsets.only(top: 50),
                               child: Text(
-                                "Dr.Brooklyn Simmons",
+                                "${widget.info.name}",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w500),
                               ),
@@ -106,7 +108,7 @@ class _DocInfoState extends State<DocInfo> {
                             Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
-                                "Gastroenterologists, Venereology & \n Leprosy",
+                                "${widget.info.designation}",
                                 style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
@@ -139,9 +141,17 @@ class _DocInfoState extends State<DocInfo> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                "Dr.Lawrence A. Schiffman is a Board Certified\ngeneral, surgical and cosmetic dermatologist\npracticing in Miami,Florida...Read More",
-                                style: TextStyle(fontSize: 16, height: 2),
+                              Container(
+                                width: 350,
+                                child: ReadMoreText(
+                                  "Dr.Lawrence A. Schiffman is a Board Certified general, surgical and cosmetic dermatologist practicing in Miami,Florida. He has done many surgeries.So he is a great doctor.",
+                                  trimLines: 3,
+                                  colorClickableText: Colors.green,
+                                  trimMode: TrimMode.Line,
+                                  trimCollapsedText: "Read More",
+                                  trimExpandedText: "Read Less",
+                                  style: TextStyle(fontSize: 16, height: 2),
+                                ),
                               ),
                               SizedBox(
                                 height: 20,
@@ -303,11 +313,48 @@ class _DocInfoState extends State<DocInfo> {
         onPressed: () {
           showDialog(
               context: context,
-              builder: (context) => AlertDialog(
-                    title: Text("Booked on $_selectedDate"),
-                    content: Text(
-                        "and time ${_timeRange!.start.format(context)} - ${_timeRange!.end.format(context)}"),
-                  ));
+              builder: (context) {
+                String formattedDate =
+                    DateFormat.yMMMd('en_US').format(_selectedDate);
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  content: Container(
+                    height: 150,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Booked For",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.w600),
+                        ),
+                        Divider(
+                          color: Colors.grey,
+                          height: 12.0,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "$formattedDate",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Time: ${_timeRange!.start.format(context)} - ${_timeRange!.end.format(context)}",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              });
         },
         backgroundColor: Colors.green,
         label: const Text("Book Appointment"),

@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:santosh/components/bottomnvabar.dart';
 import 'package:santosh/controller/doctorController.dart';
 import 'package:santosh/docInfo.dart';
 import 'package:santosh/specialist.dart';
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +41,10 @@ class _HomeState extends State<HomePage> {
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          CupertinoIcons.circle_grid_3x3_fill,
+                          size: 35,
                         ),
                       ),
                       Container(
@@ -107,7 +114,7 @@ class _HomeState extends State<HomePage> {
                           color: Colors.grey[150],
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(width: 1, color: Colors.black12)),
-                      height: 58,
+                      height: 50,
                       child: TextField(
                         keyboardType: TextInputType.text,
                         style: TextStyle(color: Colors.black87),
@@ -198,42 +205,57 @@ class _HomeState extends State<HomePage> {
                             color: Color.fromRGBO(135, 206, 235, 100),
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Take Care of Mental Health \n During Pandemic",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18,
-                                        color: Colors.black87,
+                          child: Stack(children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Take Care of Mental Health \n During Pandemic",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          color: Colors.black87,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            primary: Colors.white),
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Join Event',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 18,
-                                            color: Colors.black87,
-                                          ),
-                                        ))
-                                  ],
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.white),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Join Event',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 18,
+                                              color: Colors.black87,
+                                            ),
+                                          ))
+                                    ],
+                                  ),
                                 ),
+                              ],
+                            ),
+                            Positioned(
+                              left: 150,
+                              child: Container(
+                                height: 250,
+                                width: 250,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                      'assets/main.png',
+                                    ))),
                               ),
-                              //
-                            ],
-                          )),
+                            ),
+                          ])),
                     ]),
                   ],
                 ),
@@ -245,7 +267,7 @@ class _HomeState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 16),
                     child: Text(
-                      "Next Consulation",
+                      "Next Consultation",
                       style:
                           TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
                     ),
@@ -277,16 +299,9 @@ class _HomeState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.message_rounded), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.source), label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.portrait_outlined), label: '')
-        ],
-        selectedItemColor: Colors.green,
-        unselectedItemColor: Colors.grey,
+      bottomNavigationBar: TabBarMaterialWidget(
+        index: index,
+        onChangedTab: onChangedTab,
       ),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(
@@ -301,6 +316,12 @@ class _HomeState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  void onChangedTab(int index) {
+    setState(() {
+      this.index = index;
+    });
   }
 }
 
@@ -379,7 +400,7 @@ class BuildDoctorContainer extends StatelessWidget {
                                                 .doctorList[index].designation,
                                             style: TextStyle(
                                                 fontSize: 12,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w600,
                                                 color: Colors.grey[600]),
                                           ),
                                         )
@@ -405,7 +426,7 @@ class BuildDoctorContainer extends StatelessWidget {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Container(
-                                        height: 40,
+                                        height: 30,
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.35,
@@ -419,9 +440,16 @@ class BuildDoctorContainer extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
                                           children: [
-                                            Icon(Icons.calendar_month),
-                                            Text(doctor
-                                                .doctorList[index].dateTime)
+                                            Icon(
+                                              Icons.calendar_month,
+                                              size: 20,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
+                                              child: Text(doctor
+                                                  .doctorList[index].dateTime),
+                                            )
                                           ],
                                         ),
                                       ),

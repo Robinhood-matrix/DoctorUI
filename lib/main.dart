@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:santosh/HomePage.dart';
 import 'package:santosh/controller/doctorController.dart';
 
-
 void main() {
   runApp(MultiProvider(
     providers: [
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "UI",
       home: HomePage(),
-      
     );
   }
 }
